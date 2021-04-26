@@ -173,7 +173,9 @@ def load_file(path: str) -> str:
 
 
 # Transpile a JSON post to HTML.
-def create_post(base_template: str, post_template: str, content: object, file_name: str) -> str:
+def create_post(
+    base_template: str, post_template: str, content: object, file_name: str
+) -> str:
     # Clear globals that is used by the recersive parser.
     global parsed_blocks
     global parse_stack
@@ -197,7 +199,9 @@ def create_post(base_template: str, post_template: str, content: object, file_na
         if item == "image":
             if len(item_content) > 0:
                 innerHTML = f'<img src="../images/{item_content}">'
-            index_post = index_post.replace(":image:", f'<img src="./images/{item_content}">')
+            index_post = index_post.replace(
+                ":image:", f'<img src="./images/{item_content}">'
+            )
 
         elif item == "content":
             parse_post(item_content)
@@ -226,14 +230,16 @@ def prepare_base(base: str, index: bool) -> str:
         ":home:": "../index.html",
         ":resume:": "../base/resume.html",
         ":about:": "./about.html",
-        ":css:": "../base/index.css"
+        ":css:": "../base/base.css",
+        ":js:": "../base/base.js",
     }
     links_index = {
         ":home:": "./index.html",
         ":page:": "Home",
         ":resume:": "./base/resume.html",
         ":about:": "./posts/about.html",
-        ":css:": "./base/index.css"
+        ":css:": "./base/base.css",
+        ":js:": "./base/base.js",
     }
     links = links_post
 
@@ -242,9 +248,8 @@ def prepare_base(base: str, index: bool) -> str:
 
     for key in links:
         base = base.replace(f"{key}", links[key])
-    
-    return base
 
+    return base
 
 
 def main() -> None:
@@ -262,10 +267,14 @@ def main() -> None:
             post_path = filename.replace(".json", ".html")
 
             with open(os.path.join("posts", post_path), "w") as file:
-                file.write(create_post(base_template_posts, post_template, post, post_path))
-            
+                file.write(
+                    create_post(base_template_posts, post_template, post, post_path)
+                )
+
             if bool(post["in_index"]):
-                index_posts[-1] = index_posts[-1].replace("card m-3", "card m-3 grow is-clickable")
+                index_posts[-1] = index_posts[-1].replace(
+                    "card m-3", "card m-3 grow is-clickable"
+                )
                 index_posts[-1] = f'<a href="./posts/{post_path}">{index_posts[-1]}</a>'
 
     with open("index.html", "w") as file:
