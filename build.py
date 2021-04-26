@@ -1,5 +1,4 @@
 import json
-import bs4
 import os
 import re
 
