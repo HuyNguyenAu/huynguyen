@@ -16,27 +16,27 @@ block_contents = []
 
 index_posts = []
 
-# Run every single object recursively. This essentially runs from outer in inner, 
+# Run every single object recursively. This essentially runs from outer in inner,
 # top to bottom.
 def parse_post(json_object: object) -> None:
-    # Run through each item in this dictionary, if an item is a dictionary or list, 
+    # Run through each item in this dictionary, if an item is a dictionary or list,
     # run it through this function.
     if type(json_object) is dict:
         for key in json_object:
             value = json_object[key]
-            
+
             if is_json_object_dict_or_list(value):
                 # Keep track of the recursion.
                 parse_stack.append(str(key))
                 parse_post(value)
                 parse_stack.pop()
 
-                # Since links can never be a root item in content, 
+                # Since links can never be a root item in content,
                 # we don't want consider this as a block.
                 if str(key) not in ["a"]:
                     parsed_blocks.append(str(key))
 
-    # Run through each item in this list, if an item is a dictionary or list, 
+    # Run through each item in this list, if an item is a dictionary or list,
     # run it through this function.
     elif type(json_object) is list:
         for item in json_object:
@@ -131,9 +131,7 @@ def create_html() -> str:
                         link_stack = []
                         continue
                     else:
-                        html += (
-                            f'<a href="{content}" target="_blank" rel="noreferrer">{next_content}</a>'
-                        )
+                        html += f'<a href="{content}" target="_blank" rel="noreferrer">{next_content}</a>'
                         link_stack.append("a")
                 # This is just text, just add it without any special tags.
                 else:
@@ -171,6 +169,8 @@ def create_html() -> str:
             # Handle the a single line of code.
             else:
                 html += f'<div class="is-inline-block has-text-weight-light has-background-light p-5 mb-6"><p>{content}</p></div>'
+        elif tags[-1] == "img":
+            html += f'<img src="../images/{content}" class="image mb-6">'
 
     return html
 
@@ -243,7 +243,7 @@ def prepare_base(base: str, index: bool) -> str:
         ":apple_icon:": "../apple-touch-icon.png",
         ":32_icon:": "../favicon-32x32.png",
         ":16_icon:": "../favicon-16x16.png",
-        ":site_webmanifest:": "../site.webmanifest"
+        ":site_webmanifest:": "../site.webmanifest",
     }
     links_index = {
         ":home:": "./index.html",
@@ -255,7 +255,7 @@ def prepare_base(base: str, index: bool) -> str:
         ":apple_icon:": "./apple-touch-icon.png",
         ":32_icon:": "./favicon-32x32.png",
         ":16_icon:": "./favicon-16x16.png",
-        ":site_webmanifest:": "./site.webmanifest"
+        ":site_webmanifest:": "./site.webmanifest",
     }
     links = links_post
 
