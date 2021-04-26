@@ -1,0 +1,22 @@
+{
+    "image": "",
+    "title": "About",
+    "date": "",
+    "content": [
+        {
+            "p": [
+                "A hacked together minimal and not very a JAMSTACK like web app for blogging about things that interest me."
+            ]
+        },
+        {
+            "p": [
+                {
+                    "a": [
+                        "https://github.com/HuyNguyenAu/huynguyen",
+                        "Github"
+                    ]
+                }
+            ]
+        }
+    ]
+}

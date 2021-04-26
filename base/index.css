@@ -1,0 +1,24 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.grow {
+  transition: all 0.1s ease-in-out;
+}
+
+.grow:hover {
+  transform: scale(1.01);
+}
+
+.expand {
+  min-height: 100vh !important;
+}
+
+.footer {
+  padding: 3rem 1.5rem !important;
+}
+
+.card-shadow-white {
+  box-shadow: 0 0.5em 1em -0.125em rgb(245 245 245 / 10%),
+    0 0 0 1px rgb(245 245 245 / 2%);
+}
