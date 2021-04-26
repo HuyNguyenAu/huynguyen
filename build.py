@@ -3,7 +3,8 @@ import bs4
 import os
 import re
 
-parsed_blocks = []  # Used to assign an id to each root block in content.
+# Used to assign an id to each root block in content.
+parsed_blocks = []
 # Used to keep track of the parent and decendents of each object in content.
 parse_stack = []
 
@@ -11,6 +12,8 @@ block_ids = []  # A list of ids for each object in content.
 # A list of arrays that contain the parent and decendents for each object in content.
 block_tags = []
 block_contents = []  # A list of text, code, and links.
+
+index_posts = []
 
 # Run every single object recursively. This essentially runs from outer in inner, top to bottom.
 def parse_post(json_object: object) -> None:
@@ -74,6 +77,7 @@ def previous(array: list, index: int) -> object:
     if index > 0:
         return array[index - 1]
     return None
+
 
 # Return HTML code that is parsed from JSON file that has been broken down
 # into block_ids, block_tags, and block_contents.
@@ -162,13 +166,15 @@ def create_html() -> str:
 
     return html
 
+
 # Return a string containing the contents of a file.
 def load_file(path: str) -> str:
     with open(path, "r") as file:
         return file.read()
 
+
 # Transpile a JSON post to HTML.
-def create_post_html(base: str, post: str, content: object):
+def create_post(base_template: str, post_template: str, content: object, file_name: str) -> str:
     # Clear globals that is used by the recersive parser.
     global parsed_blocks
     global parse_stack
@@ -182,6 +188,8 @@ def create_post_html(base: str, post: str, content: object):
     block_tags = []
     block_contents = []
 
+    index_post = post_template.replace(":content:", "")
+
     # Build the HTML string of a post.
     for item in content:
         item_content = content[item]
@@ -190,30 +198,80 @@ def create_post_html(base: str, post: str, content: object):
         if item == "image":
             if len(item_content) > 0:
                 innerHTML = f'<img src="../images/{item_content}">'
+            index_post = index_post.replace(":image:", f'<img src="./images/{item_content}">')
 
         elif item == "content":
             parse_post(item_content)
-            innerHTML = create_html()
+            innerHTML = f'<div class="content">{create_html()}</div>'
+
+        elif item == "page":
+            base_template = base_template.replace(":page:", item_content)
+
+        elif item == "in_index":
+            continue
 
         else:
             innerHTML = item_content
 
-        post = post.replace(f":{item}:", innerHTML)
+        post_template = post_template.replace(f":{item}:", innerHTML)
+        index_post = index_post.replace(f":{item}:", innerHTML)
 
-    base = base.replace(":posts:", post)
+    if bool(content["in_index"]):
+        index_posts.append(index_post)
 
+    return base_template.replace(":posts:", post_template)
+
+
+def prepare_base(base: str, index: bool) -> str:
+    links_post = {
+        ":home:": "../index.html",
+        ":resume:": "../base/resume.html",
+        ":about:": "./about.html",
+        ":css:": "../base/index.css"
+    }
+    links_index = {
+        ":home:": "./index.html",
+        ":page:": "Home",
+        ":resume:": "./base/resume.html",
+        ":about:": "./posts/about.html",
+        ":css:": "./base/index.css"
+    }
+    links = links_post
+
+    if index:
+        links = links_index
+
+    for key in links:
+        base = base.replace(f"{key}", links[key])
+    
     return base
 
 
-content_path = "content"
-for filename in os.listdir(content_path):
-    if filename.endswith(".json"):
-        base_template = load_file("base/base.html")
-        post_template = load_file("base/post.html")
 
-        path = os.path.join(content_path, filename)
-        post = read_file(path)
-        post_path = os.path.join("posts", filename.replace(".json", ".html"))
+def main() -> None:
+    content_path = "content"
 
-        with open(post_path, "w") as file:
-            file.write(create_post_html(base_template, post_template, post))
+    base_template_posts = prepare_base(load_file("base/base.html"), False)
+    base_template_index = prepare_base(load_file("base/base.html"), True)
+    post_template = load_file("base/post.html")
+
+    # Create posts.
+    for filename in os.listdir(content_path):
+        if filename.endswith(".json"):
+            path = os.path.join(content_path, filename)
+            post = read_file(path)
+            post_path = filename.replace(".json", ".html")
+
+            with open(os.path.join("posts", post_path), "w") as file:
+                file.write(create_post(base_template_posts, post_template, post, post_path))
+            
+            if bool(post["in_index"]):
+                index_posts[-1] = index_posts[-1].replace("card m-3", "card m-3 grow is-clickable")
+                index_posts[-1] = f'<a href="./posts/{post_path}">{index_posts[-1]}</a>'
+
+    with open("index.html", "w") as file:
+        html = base_template_index.replace(":posts:", "".join(index_posts))
+        file.write(html)
+
+
+main()
