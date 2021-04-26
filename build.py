@@ -7,30 +7,37 @@ parsed_blocks = []
 # Used to keep track of the parent and decendents of each object in content.
 parse_stack = []
 
-block_ids = []  # A list of ids for each object in content.
+# A list of ids for each object in content.
+block_ids = []
 # A list of arrays that contain the parent and decendents for each object in content.
 block_tags = []
-block_contents = []  # A list of text, code, and links.
+# A list of text, code, and links.
+block_contents = []
 
 index_posts = []
 
-# Run every single object recursively. This essentially runs from outer in inner, top to bottom.
+# Run every single object recursively. This essentially runs from outer in inner, 
+# top to bottom.
 def parse_post(json_object: object) -> None:
-    # Run through each item in this dictionary, if an item is a dictionary or list, run it through this function.
+    # Run through each item in this dictionary, if an item is a dictionary or list, 
+    # run it through this function.
     if type(json_object) is dict:
         for key in json_object:
             value = json_object[key]
+            
             if is_json_object_dict_or_list(value):
                 # Keep track of the recursion.
                 parse_stack.append(str(key))
                 parse_post(value)
                 parse_stack.pop()
 
-                # Since links can never be a root item in content, we don't want consider this as a block.
+                # Since links can never be a root item in content, 
+                # we don't want consider this as a block.
                 if str(key) not in ["a"]:
                     parsed_blocks.append(str(key))
 
-    # Run through each item in this list, if an item is a dictionary or list, run it through this function.
+    # Run through each item in this list, if an item is a dictionary or list, 
+    # run it through this function.
     elif type(json_object) is list:
         for item in json_object:
             if is_json_object_dict_or_list(item):
@@ -124,7 +131,9 @@ def create_html() -> str:
                         link_stack = []
                         continue
                     else:
-                        html += f'<a href="{content}" target="_blank">{next_content}</a>'
+                        html += (
+                            f'<a href="{content}" target="_blank">{next_content}</a>'
+                        )
                         link_stack.append("a")
                 # This is just text, just add it without any special tags.
                 else:
