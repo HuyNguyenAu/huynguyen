@@ -1,4 +1,6 @@
 {
+    "page": "Setting up Matterport Mask RCNN",
+    "in_index": 1,
     "image": "setting_up_matterport_mask_rcnn.jpg",
     "title": "Setting up Matterport Mask RCNN",
     "date": "14/04/2020",
@@ -72,12 +74,6 @@
                     "a": [
                         "https://www.tensorflow.org/guide/upgrade",
                         "tensorflow.org/guide/upgrade"
-                    ]
-                },
-                {
-                    "a": [
-                        "https://www.tensorflow.org/guide/upgrade",
-                        "tensorflow.org/guide/upgrade/0"
                     ]
                 },
                 "."
