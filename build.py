@@ -216,9 +216,6 @@ def create_post(
             parse_post(item_content)
             innerHTML = f'<div class="content">{create_html()}</div>'
 
-        elif item == "page":
-            base_template = base_template.replace(":page:", item_content)
-
         elif item == "in_index":
             continue
 
@@ -230,6 +227,8 @@ def create_post(
 
     if bool(content["in_index"]):
         index_posts.append(index_post)
+
+    base_template = base_template.replace(":page:", content["title"])
 
     return base_template.replace(":posts:", post_template)
 
