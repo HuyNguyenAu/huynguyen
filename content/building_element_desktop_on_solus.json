@@ -1,81 +1,83 @@
 {
     "in_index": 1,
-    "image": "setting_up_matterport_mask_rcnn.jpg",
+    "image": "building_element_desktop_on_solus.jpg",
     "title": "Building Element Desktop From Source On Solus",
     "date": "24/03/2020",
     "content": [
         {
             "p": [
-                "In this short article, we will set up Matterport's Mask RCNN repository."
-            ]
-        },
-        {
-            "p": [
-                "I ran into many dependency issues, and I wanted to document this and share this to others."
-            ]
-        },
-        {
-            "p": [
-                "Clone the repository:"
+                "Install yarn:"
             ]
         },
         {
             "code": [
-                "git clone https://github.com/matterport/Mask_RCNN.git"
+                "sudo eopkg it yarn",
+                "sudo eopkg install sqlcipher-devel",
+                "sudo eopkg it libsecret-devel",
+                "sudo eopkg install -c system.devel"
             ]
         },
         {
             "p": [
-                "Remove opencv-python from requirements.txt:"
+                "Clone repository:"
             ]
         },
         {
             "code": [
-                "numpy",
-                "scipy",
-                "Pillow",
-                "cython",
-                "matplotlib",
-                "scikit-image",
-                "tensorflow>=1.3.0",
-                "keras>=2.0.8",
-                "opencv-python <--- DELETE THIS LINE",
-                "h5py",
-                "imgaug",
-                "IPython[all]"
+                "git clone https://github.com/vector-im/element-desktop.git"
             ]
         },
         {
             "p": [
-                "Install the required dependencies:"
+                "Edit package.json to target AppImage for Linux:"
             ]
         },
         {
             "code": [
-                "conda install --file requirements.txt",
-                "conda install -c conda-forge opencv pycocotools"
+                "...",
+                "\"linux\": {",
+                "&nbsp;&nbsp;\"target\": \"appimage\",",
+                "..."
             ]
         },
         {
             "p": [
-                "Migrate the project to TensorFlow 2:"
+                "Install yarn dependencies and build it:"
             ]
         },
         {
             "code": [
-                "tf_upgrade_v2 --intree Mask_RCNN/ --outtree Mask_RCNN_V2/ --reportfile report.txt"
+                "yarn install",
+                "yarn run fetch --importkey",
+                "yarn run fetch --cfgdir '' 1.7.25",
+                "yarn run build:native"
             ]
         },
         {
             "p": [
-                "For more information about migrating TensorFlow projects, please go to ",
-                {
-                    "a": [
-                        "https://www.tensorflow.org/guide/upgrade",
-                        "tensorflow.org/guide/upgrade"
-                    ]
-                },
-                "."
+                "Edit /element.io/config.json to change default server:"
+            ]
+        },
+        {
+            "code": [
+                "...",
+                "\"default_server_name\": \"example-server.com\"",
+                "..."
+            ]
+        },
+        {
+            "p": [
+                "Copy config.json to config folder:"
+            ]
+        },
+        {
+            "code": [
+                "cp config.json ~/.config/Element/config.json"
+            ]
+        },
+        {
+            "p": [
+                "Built executables are stored in the /dist directory."
             ]
         }
     ]
