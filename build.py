@@ -116,7 +116,7 @@ def create_html() -> str:
                 # this is a new link and not part of a previous link.
 
                 if tags[-1] == "a":
-                    html += f'<p><a href="{content}" target="_blank">{next_content}</a>'
+                    html += f'<p><a href="{content}" target="_blank" rel="noreferrer">{next_content}</a>'
                     link_stack.append("a")
                 else:
                     html += f"<p>{content}"
@@ -132,7 +132,7 @@ def create_html() -> str:
                         continue
                     else:
                         html += (
-                            f'<a href="{content}" target="_blank">{next_content}</a>'
+                            f'<a href="{content}" target="_blank" rel="noreferrer">{next_content}</a>'
                         )
                         link_stack.append("a")
                 # This is just text, just add it without any special tags.
