@@ -7,7 +7,7 @@
     "content": [
         {
             "p": [
-                "A hacked together minimal and not very a JAMSTACK like web app for blogging about things that interest me."
+                "A hacked together minimal static website generated from JSON files for things that interest me."
             ]
         },
         {
