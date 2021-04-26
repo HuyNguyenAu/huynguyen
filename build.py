@@ -241,6 +241,10 @@ def prepare_base(base: str, index: bool) -> str:
         ":about:": "./about.html",
         ":css:": "../base/base.css",
         ":js:": "../base/base.js",
+        ":apple_icon:": "../apple-touch-icon.png",
+        ":32_icon:": "../favicon-32x32.png",
+        ":16_icon:": "../favicon-16x16.png",
+        ":site_webmanifest:": "../site.webmanifest"
     }
     links_index = {
         ":home:": "./index.html",
@@ -249,6 +253,10 @@ def prepare_base(base: str, index: bool) -> str:
         ":about:": "./posts/about.html",
         ":css:": "./base/base.css",
         ":js:": "./base/base.js",
+        ":apple_icon:": "./apple-touch-icon.png",
+        ":32_icon:": "./favicon-32x32.png",
+        ":16_icon:": "./favicon-16x16.png",
+        ":site_webmanifest:": "./site.webmanifest"
     }
     links = links_post
 
