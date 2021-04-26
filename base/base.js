@@ -3,8 +3,6 @@
 /* jslint devel: true */
 
 (function () {
-  setTheme();
-
   document.addEventListener('DOMContentLoaded', onDOMContentLoaded);
   /**
    * Initialise burger, navbar items, and go to top button.
@@ -12,7 +10,6 @@
   function onDOMContentLoaded() {
     initBurger();
     initGoToTopButton();
-    setTheme();
   }
 
   /**
@@ -39,46 +36,5 @@
         1 or window.scrollMaxY - 1. */
         window.scrollTo(0, 1);
       });
-  }
-
-  /**
-   * Set the theme based on the theme defined in the document.location.
-   */
-  function setTheme() {
-    const elements = document.querySelectorAll(
-      'html, body, nav, footer, .card, .box, h1, p, button, a, #navbar'
-    );
-    const theme = getTheme(document.location);
-
-    for (let i = 0; i < elements.length; i++) {
-      const element = elements[i];
-
-      if (theme === 'light') {
-        element.classList.remove(
-          'has-background-dark',
-          'card-shadow-white',
-          'has-text-white'
-        );
-      } else {
-        if (element.classList.contains('card') || element.classList.contains('box')) {
-          element.classList.add('card-shadow-white');
-        }
-
-        element.classList.add('has-background-dark', 'has-text-white');
-      }
-    }
-  }
-
-  /**
-   * Get the theme from the given url.
-   *
-   * @param String url
-   *
-   * @return String
-   */
-  function getTheme(location) {
-    const url = new URL(location);
-
-    return url.searchParams.get('theme');
   }
 })();
