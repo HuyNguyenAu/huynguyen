@@ -90,7 +90,7 @@ To parse the `content`, we first run it through a recursive parser.
 
 Why?
 
-Because I rarely get the chance to implement and use such a thing. (In hindsight, a simple nested loop for three layers is much simpler and would have made the implementation much cleaner and simpler!).
+Because I rarely get the chance to implement and use such a thing. (In hindsight, a simple nested loop for three layers is much simpler and would have made the implementation much cleaner and smaller!).
 
 This recursive parser converts the `content` into two arrays: `block_ids` (a list of numbers that allows us to tell which block_tag and block_content belong together), `block_tags` (contains a list of tags), and `block_contents`(contains the only string).
 
