@@ -30,3 +30,39 @@ The program (build.py) does follows the following steps:
 2. Loop through each JSON file in /content:
 3. Convert JSON to HTML and save it in /posts.
 4. Create index.html.
+
+Now, to keep the parser not really a transpiler simple the article has the following structure:
+```json
+{
+    "in_index": 1,
+    "image": "building_element_desktop_on_solus.jpg",
+    "title": "Building Element Desktop From Source On Solus",
+    "date": "24/03/2020",
+    "content": [
+        {
+            "p": [
+                "Hello World",
+                {
+                    "a": [
+                        "https://huynguyen.tech",
+                        "huynguyen.tech"
+                    ]
+                },
+                "."
+            ]
+        },
+        {
+            "code": [
+                "nano hello_world.rs",
+                "rustc hello_world.rs"
+            ]
+        },
+         {
+            "img": [
+                "hello_world.jpg",
+            ]
+        },
+    ]
+}
+```
+
