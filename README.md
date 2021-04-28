@@ -94,7 +94,7 @@ Because I rarely get the chance to implement and use such a thing. (In hindsight
 
 This recursive parser converts the `content` into two arrays: `block_ids` (a list of numbers that allows us to tell which block_tag and block_content belong together), `block_tags` (contains a list of tags), and `block_contents`(contains the only string).
 
-If we run the above example, the `block_ids`, `block_tags`, and `block_content` will look as follows:
+If we run with the above example, the `block_ids`, `block_tags`, and `block_content` will look as follows:
 ```
 block_ids = [0, 0, 0, 0, 1, 1, 2]
 block_tags = [
