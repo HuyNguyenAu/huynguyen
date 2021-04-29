@@ -34,36 +34,6 @@ The program (build.py) does follows the following steps:
 Now, to keep the parser not really a transpiler simple each article has the following structure:
 ```json
 {
-    "in_index": 1,
-    "image": "hello_world_rust.jpg",
-    "title": "Your First In Rust",
-    "date": "01/01/2020",
-    "content": [
-        {
-            "p": [
-                "Hello World",
-                {
-                    "a": [
-                        "https://www.rust-lang.org/",
-                        "Rust Lang"
-                    ]
-                },
-                "."
-            ]
-        },
-        {
-            "code": [
-                "nano hello_world.rs",
-                "rustc hello_world.rs"
-            ]
-        },
-         {
-            "img": [
-                "hello_world.jpg",
-            ]
-        },
-    ]
-}
 ```
 
 The `in_index` determines if the post should appear in the home page (index.html).

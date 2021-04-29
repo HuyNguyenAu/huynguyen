@@ -289,7 +289,7 @@ def main() -> None:
 
             if bool(post["in_index"]):
                 index_posts[-1] = index_posts[-1].replace(
-                    "card m-3", "card m-3 grow is-clickable"
+                    "card m-6", "card m-6 grow is-clickable"
                 )
                 index_posts[-1] = f'<a href="./posts/{post_path}">{index_posts[-1]}</a>'
 
