@@ -7,9 +7,8 @@
     document.location.search = 'theme=light';
   } else {
     setThemeButtonText();
+    setTheme();
   }
-
-  setTheme();
 
   document.addEventListener('DOMContentLoaded', onDOMContentLoaded);
   document.getElementById('theme').addEventListener('click', onThemeButtonClicked);
