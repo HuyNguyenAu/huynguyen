@@ -156,7 +156,7 @@ def create_html() -> str:
         elif root_tag == "code":
             # Handle the start of code with multiple lines.
             if prev_root_id != root_id and next_root_id == root_id:
-                html += f'<div class="is-inline-block has-text-weight-light has-background-light p-5 mb-6"><p>{content}</p>'
+                html += f'<div class="code is-inline-block has-text-weight-light has-background-light p-5 mb-6"><p>{content}</p>'
 
             # Handle the middle of code with multiple lines.
             elif prev_root_id == root_id and next_root_id == root_id:
@@ -168,7 +168,7 @@ def create_html() -> str:
 
             # Handle the a single line of code.
             else:
-                html += f'<div class="is-inline-block has-text-weight-light has-background-light p-5 mb-6"><p>{content}</p></div>'
+                html += f'<div class="code is-inline-block has-text-weight-light has-background-light p-5 mb-6"><p>{content}</p></div>'
         elif tags[-1] == "img":
             html += f'<img src="../images/{content}" class="image mb-6">'
 

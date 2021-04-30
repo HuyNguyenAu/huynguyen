@@ -22,3 +22,7 @@ html {
   box-shadow: 0 0.5em 1em -0.125em rgb(245 245 245 / 10%),
     0 0 0 1px rgb(245 245 245 / 2%);
 }
+
+.code {
+  border-radius: .25rem;
+}
