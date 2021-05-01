@@ -117,7 +117,7 @@
       if (element.tagName === 'A') {
         const link = element.getAttribute('href');
 
-        if (link) {
+        if (link && !link.startsWith("https://")) {
           element.setAttribute('href', `${link}?theme=${theme}`)
         }
       }
