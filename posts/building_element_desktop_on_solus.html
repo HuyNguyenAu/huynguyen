@@ -51,7 +51,7 @@
         </div>
     </nav>
 
-    <div class="container expand"><div class="card m-6">
+    <div class="container expand"><div class="card m-3">
     <div class="card-image">
         <figure class="image">
             <img src="../images/building_element_desktop_on_solus.png">
@@ -64,7 +64,18 @@
                 <p class="subtitle is-6">24/03/2020</p>
             </div>
         </div>
-        <div class="content"><p>Install yarn:</p><div class="code is-inline-block has-text-weight-light has-background-light p-5 mb-6"><p>sudo eopkg it yarn</p><p>sudo eopkg install sqlcipher-devel</p><p>sudo eopkg it libsecret-devel</p><p>sudo eopkg install -c system.devel</p></div><p>Clone repository:</p><div class="code is-inline-block has-text-weight-light has-background-light p-5 mb-6"><p>git clone https://github.com/vector-im/element-desktop.git</p></div><p>Edit package.json to target AppImage for Linux:</p><div class="code is-inline-block has-text-weight-light has-background-light p-5 mb-6"><p>...</p><p>"linux": {</p><p>&nbsp;&nbsp;"target": "appimage",</p><p>...</p></div><p>Install yarn dependencies and build it:</p><div class="code is-inline-block has-text-weight-light has-background-light p-5 mb-6"><p>yarn install</p><p>yarn run fetch --importkey</p><p>yarn run fetch --cfgdir '' 1.7.25</p><p>yarn run build:native</p></div><p>Edit /element.io/config.json to change default server:</p><div class="code is-inline-block has-text-weight-light has-background-light p-5 mb-6"><p>...</p><p>"default_server_name": "example-server.com"</p><p>...</p></div><p>Copy config.json to config folder:</p><div class="code is-inline-block has-text-weight-light has-background-light p-5 mb-6"><p>cp config.json ~/.config/Element/config.json</p></div><p>Built executables are stored in the /dist directory.</p></div>
+        <div class="content"><p>Install yarn:</p><pre class="code">sudo eopkg it yarn
+sudo eopkg install sqlcipher-devel
+sudo eopkg it libsecret-devel
+sudo eopkg install -c system.devel</pre><p>Clone repository:</p><pre class="code">git clone https://github.com/vector-im/element-desktop.git</pre><p>Edit package.json to target AppImage for Linux:</p><pre class="code">...
+"linux": {
+&nbsp;&nbsp;"target": "appimage",
+...</pre><p>Install yarn dependencies and build it:</p><pre class="code">yarn install
+yarn run fetch --importkey
+yarn run fetch --cfgdir '' 1.7.25
+yarn run build:native</pre><p>Edit /element.io/config.json to change default server:</p><pre class="code">...
+"default_server_name": "example-server.com"
+...</pre><p>Copy config.json to config folder:</p><pre class="code">cp config.json ~/.config/Element/config.json</pre><p>Built executables are stored in the /dist directory.</p></div>
     </div>
 </div></div>
 

@@ -98,6 +98,7 @@
 
           element.classList.add(
             'has-background-dark',
+            'has-text-white'
           );
         } else {
           element.classList.add('has-background-black', 'has-text-white');
