@@ -11,7 +11,7 @@ This is a proof of concept where there are two things that I want to put an emph
 The goal of this project was to answer the following question:
 #### Is it a good idea to have a statically generated website that uses JSON files as a data source?
 
-This is a very simple and statically generated site. My website https://huynguyen.tech follows three principles:
+This is a very simple and statically generated site. My website huynguyenau.github.io/huynguyen/ follows three principles:
 - Minimalism
 - Simplicity
 - Have the least amount of dependencies
